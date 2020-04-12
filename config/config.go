@@ -1,24 +1,50 @@
 package config
 
 import (
-	"os"
+	"chat/tool"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"path/filepath"
+	"sync"
 )
 
-type Config struct {
-	LogicConfig LogicConfig
+const (
+	yamlConfigPath string = "/config/config.yaml"
+)
+
+var (
+	configOnce sync.Once
+	Config config
+)
+
+type config struct {
+	Websocket websocket `yaml:"websocket"`
 }
 
-type LogicConfig struct {
-	
+type websocket struct {
+	Bind 			string  `yaml:"bind"`
+	ReadBufferSize  int 	`yaml:"ReadBufferSize"`
+	WriteBufferSize int 	`yaml:"WriteBufferSize"`
 }
 
 func init()  {
-	path, _ := filepath.Abs("./")
-	configFilePath := path+"/config/config.yaml1"
-	_, err := os.Stat(configFilePath)
-	if os.IsNotExist(err) {
-		// todo 错误
-		panic(err)
-	}
+	initConfig()
+}
+
+func initConfig()  {
+	configOnce.Do(func() {
+		// init logger
+		if !tool.LogInitState {
+			tool.LoggerInit()
+		}
+
+		path, _ := filepath.Abs("./")
+		configFilePath := path+yamlConfigPath
+		yamlConfig, err := ioutil.ReadFile(configFilePath)
+		if err != nil {
+			// todo 错误
+			tool.Logger.Fatal().Err(err).Msg("未找到该文件")
+		}
+		yaml.Unmarshal(yamlConfig, &Config)
+	})
 }

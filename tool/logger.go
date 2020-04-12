@@ -6,11 +6,16 @@ import (
 	"sync"
 )
 
-var once sync.Once
+var loggerOnce sync.Once
 var Logger zerolog.Logger
+var LogInitState bool = false
 
 func init()  {
-	once.Do(func() {
+	LoggerInit()
+}
+
+func LoggerInit()  {
+	loggerOnce.Do(func() {
 		Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 		// print code file row number
 		//Logger = Logger.With().Caller().Logger()
@@ -18,6 +23,7 @@ func init()  {
 			Out: os.Stderr,
 			TimeFormat: TimeFormat,
 		})
+		LogInitState = true
 	})
 }
 

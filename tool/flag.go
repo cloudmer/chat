@@ -6,26 +6,30 @@ import (
 	"os"
 )
 
-var (
-	h     bool // 帮助
-	start bool // 启动
-)
+var start string // 启动服务类型
 
-func init() {
-	flag.BoolVar(&h, "h", false, "this help")
-	flag.BoolVar(&start, "start", false, "is start service")
+func ServiceName() string {
+	// init logger
+	if !LogInitState {
+		LoggerInit()
+	}
 
+	flag.StringVar(&start, "start", "", "is start service")
 	// 改变默认的 Usage
-	flag.Usage = usage
+	flag.Usage = Usage
 	flag.Parse()
 
-	if h {
-		usage()
+	// select services
+	if start == "" {
+		Usage()
+		Logger.Fatal().Msg("清选择启动服务类型")
 	}
+	return start
 }
 
-func usage()  {
-	fmt.Fprintf(os.Stderr, `chat version: chat/1.0
-Usage: nginx [-h] [-help] [-start start]
+func Usage()  {
+	fmt.Fprintf(os.Stderr, `chat version: chat/1.0 (Author: cloudmer, github: http://github.com)
+-help  get help
+-start service1 or service2
 `)
 }

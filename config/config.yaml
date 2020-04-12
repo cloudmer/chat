@@ -1,0 +1,4 @@
+websocket:
+  bind: "0.0.0.0:10086"
+  ReadBufferSize: 1024
+  WriteBufferSize: 1024
