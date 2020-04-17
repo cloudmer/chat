@@ -8,3 +8,16 @@ site:
 # http api 接口 监听端口
 api:
   port: 10089
+# websocket 共享数据存储服务器
+redis:
+  addr: 127.0.0.1
+  port: 6379
+# 消息队列
+queue:
+  type: kafka # 队列类型 kafka or redis
+  kakfa:
+    addr: 127.0.0.1
+    port: 127.0.0.16379
+  redis:
+    addr: 127.0.0.1
+    port: 127.0.0.16379
