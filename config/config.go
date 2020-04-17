@@ -15,13 +15,13 @@ const (
 var (
 	configOnce sync.Once
 	Config config
-	Api api
 )
 
 type config struct {
 	Websocket websocket `yaml:"websocket"`
 	Site 	  site 		`yaml:"site"`
 	Api 	  api 		`yaml:"api"`
+	Queue     queue		`yaml:"queue"`
 }
 
 type websocket struct {
@@ -36,6 +36,22 @@ type site struct {
 
 type api struct {
 	Port int `yaml:"port"`
+}
+
+type queue struct {
+	Type  string `yaml:"type"`
+	Kafka kafka  `yaml:"kafka"`
+	Redis redis  `yaml:"redis"`
+}
+
+type kafka struct {
+	Addr string `yaml:"addr"`
+	Port int 	`yaml:"port"`
+}
+
+type redis struct {
+	Addr string `yaml:"addr"`
+	Port int 	`yaml:"port"`
 }
 
 func init()  {
