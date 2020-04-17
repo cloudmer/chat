@@ -3,6 +3,7 @@ package main
 import (
 	"chat/services/api"
 	"chat/services/site"
+	"chat/services/task"
 	"chat/services/websocket"
 	"chat/tool"
 	_ "chat/tool"
@@ -19,6 +20,8 @@ func main() {
 	switch tool.ServiceName() {
 	case "websocket":
 		websocket.New().Run()
+	case "task":
+		task.New().Run()
 	case "api":
 		api.New().Run()
 	case "site":

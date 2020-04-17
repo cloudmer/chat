@@ -7,15 +7,15 @@ import (
 	"net/http"
 )
 
-type Service struct {
+type service struct {
 
 }
 
-func New() *Service {
-	return new(Service)
+func New() *service {
+	return new(service)
 }
 
-func (service *Service) Run()  {
+func (service *service) Run()  {
 	// 读取配置文件
 	service.readConfig()
 	addr := fmt.Sprintf(":%d", config.Config.Site.Port)
@@ -26,7 +26,7 @@ func (service *Service) Run()  {
 }
 
 // 读取验证配置
-func (service *Service) readConfig()  {
+func (service *service) readConfig()  {
 	if config.Config.Site.Port == 0 {
 		tool.Logger.Fatal().Msg("请先配置 site port")
 	}

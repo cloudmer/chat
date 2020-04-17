@@ -6,15 +6,15 @@ import (
 	"runtime"
 )
 
-type Service struct {
+type service struct {
 
 }
 
-func New() *Service {
-	return new(Service)
+func New() *service {
+	return new(service)
 }
 
-func (service *Service) Run()  {
+func (service *service) Run()  {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	service.readConfig()
 	if err := service.startWebsocket(); err != nil {
@@ -23,7 +23,7 @@ func (service *Service) Run()  {
 }
 
 // 读取验证配置
-func (service *Service) readConfig()  {
+func (service *service) readConfig()  {
 	if config.Config.Websocket.ReadBufferSize == 0 {
 		tool.Logger.Fatal().Msg("请先配置 websocket ReadBufferSize")
 	}
