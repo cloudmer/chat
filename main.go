@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chat/services/site"
 	"chat/services/websocket"
 	"chat/tool"
 	_ "chat/tool"
@@ -17,6 +18,8 @@ func main() {
 	switch tool.ServiceName() {
 	case "websocket":
 		websocket.New().Run()
+	case "site":
+		site.New().Run()
 	default:
 		tool.Usage()
 		tool.Logger.Fatal().Msg("清选择正确的服务类型")

@@ -19,12 +19,17 @@ var (
 
 type config struct {
 	Websocket websocket `yaml:"websocket"`
+	Site 	  site 		`yaml:"site"`
 }
 
 type websocket struct {
 	Bind 			string  `yaml:"bind"`
 	ReadBufferSize  int 	`yaml:"ReadBufferSize"`
 	WriteBufferSize int 	`yaml:"WriteBufferSize"`
+}
+
+type site struct {
+	Port int `yaml:"port"`
 }
 
 func init()  {
