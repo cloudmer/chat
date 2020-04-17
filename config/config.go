@@ -15,11 +15,13 @@ const (
 var (
 	configOnce sync.Once
 	Config config
+	Api api
 )
 
 type config struct {
 	Websocket websocket `yaml:"websocket"`
 	Site 	  site 		`yaml:"site"`
+	Api 	  api 		`yaml:"api"`
 }
 
 type websocket struct {
@@ -29,6 +31,10 @@ type websocket struct {
 }
 
 type site struct {
+	Port int `yaml:"port"`
+}
+
+type api struct {
 	Port int `yaml:"port"`
 }
 

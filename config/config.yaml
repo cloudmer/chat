@@ -2,6 +2,9 @@ websocket:
   bind: "0.0.0.0:10086"
   ReadBufferSize: 1024
   WriteBufferSize: 1024
-# http 网页 监听端口
+# http websocket 聊天网页 监听端口
 site:
   port: 10087
+# http api 接口 监听端口
+api:
+  port: 10089
