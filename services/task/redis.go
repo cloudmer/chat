@@ -11,3 +11,7 @@ func (rd *redis) pull()  {
 func (rd *redis) push()  {
 
 }
+
+func (rd *redis) run() queue {
+	return new(redis)
+}

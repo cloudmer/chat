@@ -18,15 +18,18 @@ func (service *service) Run()  {
 	service.readConfig()
 }
 
-func (service *service) readConfig()  {
+func (service *service) readConfig() queue {
 	switch config.Config.Queue.Type {
 	case "kafka":
 		service.readKafkaConfig()
+		return new(kafka)
 	case "redis":
 		service.readRedisConfig()
+		return new(redis)
 	default:
 		tool.Logger.Fatal().Msg("请配置 queue.type")
 	}
+	return nil
 }
 
 func (service *service) readKafkaConfig() {
