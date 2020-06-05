@@ -15,11 +15,12 @@ func New() *service {
 
 func (service *service) Run()  {
 	// 读取配置文件
-	service.readConfig()
+	queue := service.readConfig()
+	queue.run()
 }
 
 func (service *service) readConfig() queue {
-	switch config.Config.Queue.Type {
+	switch config.Option.Queue.Type {
 	case "kafka":
 		service.readKafkaConfig()
 		return new(kafka)
@@ -33,19 +34,19 @@ func (service *service) readConfig() queue {
 }
 
 func (service *service) readKafkaConfig() {
-	if config.Config.Queue.Kafka.Addr == "" {
+	if config.Option.Queue.Kafka.Addr == "" {
 		tool.Logger.Fatal().Msg("请配置 queue.kafka.addr")
 	}
-	if config.Config.Queue.Kafka.Port == 0 {
+	if config.Option.Queue.Kafka.Port == 0 {
 		tool.Logger.Fatal().Msg("请配置 queue.kafka.port")
 	}
 }
 
 func (service *service) readRedisConfig() {
-	if config.Config.Queue.Redis.Addr == "" {
+	if config.Option.Queue.Redis.Addr == "" {
 		tool.Logger.Fatal().Msg("请配置 queue.redis.addr")
 	}
-	if config.Config.Queue.Redis.Port == 0 {
+	if config.Option.Queue.Redis.Port == 0 {
 		tool.Logger.Fatal().Msg("请配置 queue.redis.port")
 	}
 }

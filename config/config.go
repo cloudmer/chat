@@ -14,7 +14,7 @@ const (
 
 var (
 	configOnce sync.Once
-	Config config
+	Option config
 )
 
 type config struct {
@@ -72,6 +72,6 @@ func initConfig()  {
 			// todo 错误
 			tool.Logger.Fatal().Err(err).Msg("未找到该文件")
 		}
-		yaml.Unmarshal(yamlConfig, &Config)
+		yaml.Unmarshal(yamlConfig, &Option)
 	})
 }

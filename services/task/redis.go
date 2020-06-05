@@ -1,5 +1,7 @@
 package task
 
+import "chat/tool"
+
 type redis struct {
 
 }
@@ -12,6 +14,6 @@ func (rd *redis) push()  {
 
 }
 
-func (rd *redis) run() queue {
-	return new(redis)
+func (rd *redis) run() {
+	tool.Logger.Info().Msg("this is redis")
 }

@@ -24,10 +24,10 @@ func (service *service) Run()  {
 
 // 读取验证配置
 func (service *service) readConfig()  {
-	if config.Config.Websocket.ReadBufferSize == 0 {
+	if config.Option.Websocket.ReadBufferSize == 0 {
 		tool.Logger.Fatal().Msg("请先配置 websocket ReadBufferSize")
 	}
-	if config.Config.Websocket.WriteBufferSize == 0 {
+	if config.Option.Websocket.WriteBufferSize == 0 {
 		tool.Logger.Fatal().Msg("请先配置 websocket WriteBufferSize")
 	}
 }
